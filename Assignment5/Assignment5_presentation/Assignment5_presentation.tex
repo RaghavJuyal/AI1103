@@ -1,0 +1,230 @@
+\documentclass{beamer}
+\usepackage{listings}
+\lstset{
+%language=C,
+frame=single, 
+breaklines=true,
+columns=fullflexible
+}
+\usepackage{blkarray}
+\usepackage{subcaption}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{tkz-euclide} % loads  TikZ and tkz-base
+%\usetkzobj{all}
+\usetikzlibrary{calc,math}
+\usepackage{float}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\myvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
+\usepackage[export]{adjustbox}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+\usetheme{Boadilla}
+\providecommand{\sbrak}[1]{\ensuremath{{}\left[#1\right]}}
+\providecommand{\lsbrak}[1]{\ensuremath{{}\left[#1\right.}}
+\providecommand{\rsbrak}[1]{\ensuremath{{}\left.#1\right]}}
+\providecommand{\pr}[1]{\ensuremath{\Pr\left(#1\right)}}
+\providecommand{\brak}[1]{\ensuremath{\left(#1\right)}}
+\providecommand{\lbrak}[1]{\ensuremath{\left(#1\right.}}
+\providecommand{\rbrak}[1]{\ensuremath{\left.#1\right)}}
+\providecommand{\cbrak}[1]{\ensuremath{\left\{#1\right\}}}
+\providecommand{\lcbrak}[1]{\ensuremath{\left\{#1\right.}}
+\providecommand{\rcbrak}[1]{\ensuremath{\left.#1\right\}}}
+\newcommand*{\permcomb}[4][0mu]{{{}^{#3}\mkern#1#2_{#4}}}
+\newcommand*{\perm}[1][-3mu]{\permcomb[#1]{P}}
+\newcommand*{\comb}[1][-1mu]{\permcomb[#1]{C}}
+
+\title{CSIR UGC NET EXAM (Dec 2014), Question 113}
+\author{Raghav Juyal}
+\date{EP20BTECH11018} 
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{block}{Some important concepts}
+      \begin{enumerate}
+        \item The beta function, $B\brak{x,y}$
+        \item Marginal distribution
+        \item Likelihood function and maximum likelihood estimator
+        \item Prior and posterior distributions
+        \item Posterior mean
+      \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{block}{The beta function, $B\brak{x,y}$}
+        The beta function, $B\brak{x,y}$, is defined by the integral
+        \begin{align}
+            B\brak{x,y} &= \int_0^1 t^{x-1}\,\brak{1-t}^{y-1}\,dt\nonumber\\
+            &= \frac{x+y}{xy}\times \frac{1}{\comb{x+y}{x}}\label{eq1}
+        \end{align}
+        where $Re\brak{x}>0$ and $Re\brak{y}>0$.
+    \end{block}
+    \begin{block}{Marginal distribution}
+        The marginal distribution of $x$ is given by
+        \begin{align}
+            f\brak{x} = \int_y f\brak{x,y}\,dy\label{eq2}
+        \end{align}
+     \end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{}
+    \begin{block}{Likelihood function}
+     The likelihood function, represented by $f\brak{X|\theta}$, refers to the joint probability of the data in the case of discrete distributions and joint probability density of the data in the case of continuous distributions, i.e., 
+\begin{align}
+    f\brak{X|\theta} = \prod_{i=1}^n f\brak{X_i|\theta}\label{eq3}
+\end{align}
+    \end{block}
+    \begin{block}{Maximum Likelihood Estimator}
+    The maximum likelihood estimator, represented by MLE, is the value which maximizes the likelihood function, i.e.,
+    \begin{align}
+     \text{MLE} = \text{arg$_{\theta}$ max}\brak{f\brak{X|\theta}}\label{eq4}
+    \end{align}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{block}{Prior and Posterior Distribution}
+     \textbf{Prior distribution}, where $f\brak{\theta}$ is the prior density of $\theta$, is the probability distribution that expresses established beliefs about an event before new evidence is taken into account. 
+     
+     When the new evidence is used to create a new distribution, that new distribution is called \textbf{posterior distribution}, where $f\brak{\theta|X}$ is the posterior density of $\theta$.From conditional probability we get,
+     \begin{align}
+             f\brak{\theta|X} = \frac{f\brak{X,\theta}}{f\brak{X}}
+     \end{align}
+     using \eqref{eq2} we get
+     \begin{align}
+         f\brak{\theta|X} &= \frac{f\brak{X,\theta}}{\int f\brak{X,\theta}\,d\theta}\\
+         &= \frac{f\brak{X|\theta}\, f\brak{\theta}}{\int f\brak{X|\theta}\, f\brak{\theta}\,d\theta}\label{eq5}
+     \end{align}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{block}{Posterior mean}
+      Posterior mean is the mean of the posterior distribution of $\theta$, i.e., 
+        \begin{align}
+            E\brak{\theta|X} = \int{\theta\;f\brak{\theta|X}\,d\theta}\label{eq6}
+        \end{align}
+    \end{block}
+\end{frame}
+
+
+
+\begin{frame}
+    \frametitle{Question}
+    \begin{block}{CSIR UGC NET EXAM (Dec 2014), Question 113}
+    Let $X_1,X_2,...,X_n$ be independent and identically distributed Bernoulli($\theta$), where $0<\theta<1$ and $n>1$. Let the prior density of $\theta$ be proportional to $\frac{1}{\sqrt{\theta\,(1-\theta)}}$, $0<\theta<1$. Define $S=\sum_{i=1}^nX_i$.\\[1pt] Then valid statements among the following are:
+    \begin{enumerate}
+        \item The posterior mean of $\theta$ does not exist;
+        \item The posterior mean of $\theta$ exists;
+        \item The posterior mean of $\theta$ exists and it is larger than the maximum     likelihood estimator for all values of S.
+        \item The posterior mean of $\theta$ exists and it is larger than the maximum     likelihood estimator for some values of S.
+    \end{enumerate}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solution}
+    Let $f\brak{\theta}$ be the prior density of $\theta$.
+    \begin{align}
+        &f\brak{\theta} \propto \frac{1}{\sqrt{\theta\,\brak{1-\theta}}}\nonumber\\
+        \implies &f\brak{\theta} = \frac{K}{\sqrt{\theta\,\brak{1-\theta}}}
+    \end{align}
+    where $K$ is the proportionality constant.
+    \begin{align}
+        &\int_0^1 f\brak{\theta}\,d\theta = 1\nonumber\\
+        \implies &K\;\int_0^1 \frac{1}{\sqrt{\theta\,\brak{1-\theta}}}\,d\theta =1
+    \end{align}
+   
+\end{frame}
+
+\begin{frame}
+ \frametitle{Solution Contd.}
+      From \eqref{eq1} we get,
+    \begin{align}
+        &K\times B\brak{\frac{1}{2},\frac{1}{2}} = 1\nonumber\\
+        \implies &K = \frac{1}{B\brak{\frac{1}{2},\frac{1}{2}}}\\
+        \therefore\, &f\brak{\theta} =             \frac{\theta^{-\frac{1}{2}}\,\brak{1-\theta}^{-\frac{1}{2}}}{B\brak{\frac{1}{2},\frac{1}{2}}}\label{eq7}
+    \end{align}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solution Contd.} 
+  From \eqref{eq3} we get,
+    \begin{align}
+    f\brak{X|\theta} &= \prod_{i=1}^n\theta^{X_i}\,\brak{1-\theta}^{1-X_i}\nonumber\\
+    &=\theta^S\,\brak{1-\theta}^{n-S}\label{eq8}
+    \end{align}
+    Using log of likelihood function and differentiating we get,
+\begin{align}
+    &\ln\brak{{f\brak{X|\theta}}} = S\ln\brak{{\theta}} + \brak{n-S}\ln\brak{{1-\theta}}\\
+    &\frac{\partial \ln\brak{{f\brak{X|\theta}}}}{\partial \theta} = \frac{S}{\theta} + \frac{S-n}{1-\theta} = 0 \nonumber\\
+     \therefore\, &\text{MLE} = \frac{S}{n}
+\end{align}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solution Contd.} 
+      Using \eqref{eq7} and \eqref{eq8} in \eqref{eq5} we get,
+      \begin{align}
+        f\brak{\theta|X} &= \frac{\theta^{S-\frac{1}{2}}\,\brak{1-\theta}^{n-S-\frac{1}{2}}}{\int_0^1 \theta^{S-\frac{1}{2}}\,\brak{1-\theta}^{n-S-\frac{1}{2}}\,d\theta}
+    \end{align}
+    Using \eqref{eq1} we get,
+    \begin{align}
+        f\brak{\theta|X} = \frac{\theta^{S-\frac{1}{2}}\,\brak{1-\theta}^{n-S-\frac{1}{2}}}{B\brak{S+\frac{1}{2},n-S+\frac{1}{2}}}
+    \end{align}
+\end{frame}
+
+    \begin{frame}
+      \frametitle{Solution Contd.}
+      From \eqref{eq6} we get,
+\begin{align}
+    E\brak{\theta|X} &= \int_0^1 \theta\;f\brak{\theta|X}\,d\theta\nonumber\\
+    &=\int_0^1 \frac{\theta^{S+\frac{1}{2}}\,\brak{1-\theta}^{n-S-\frac{1}{2}}}{B\brak{S+\frac{1}{2},n-S+\frac{1}{2}}}\,d\theta\nonumber\\
+    &=\frac{B\brak{S+\frac{3}{2},n-S+\frac{1}{2}}}{B\brak{S+\frac{1}{2},n-S+\frac{1}{2}}}
+\end{align}
+Using \eqref{eq1} we get
+\begin{align}
+    E\brak{\theta|X} = \frac{S+\frac{1}{2}}{n+1}\label{eq9}
+\end{align}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solution Contd.} 
+   For $E\brak{\theta|X}$ to be greater than MLE,
+\begin{align}
+    &\frac{S+\frac{1}{2}}{n+1} > \frac{S}{n}\nonumber\\
+     \therefore\;&n>2\,S\label{eq10}
+\end{align}
+\end{frame}
+
+ \begin{frame}
+  \frametitle{Solution Contd.} 
+    We see that
+    \begin{align*}
+        E\brak{\theta|X} = \frac{S+\frac{1}{2}}{n+1} 
+    \end{align*}
+       from \eqref{eq9} and
+    \begin{align*}
+        n>1 
+    \end{align*}
+    given in the question $\implies E\brak{\theta|X}$ exists.\\
+    
+    From \eqref{eq10} we see that $E\brak{\theta|X}>\, $MLE for some values of S.
+
+$\therefore$ Options 2 and 4 are correct.
+\end{frame}
+
+\end{document}
